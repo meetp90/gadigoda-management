@@ -34,26 +34,24 @@
 </head>
 
 <body>
-    <ul class="nav nav-tabs shadow" style="height: 5vh;" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                aria-selected="true">Plans</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                aria-selected="false">Driver Catalog</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-                aria-selected="false">Bookings</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="product-tab" data-toggle="tab" href="#product"  onclick="update_products_list()" role="tab" aria-controls="product"
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="../package/index.html">Plans <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="../driver/index.html">Driver</a>
+                <a class="nav-item nav-link" href="../booking/index.html">Booking</a>
+                <a class="nav-item nav-link" href="../coupon/index.html">Coupon</a>
+                <a class="nav-link" id="product-tab" data-toggle="tab" href="#product"  onclick="update_products_list()" role="tab" aria-controls="product"
                 aria-selected="false">Products</a>
-
-        </li>
-
-    </ul>
+            </div>
+        </div>
+        
+    </nav>
 
     <div class="tab-content" id="myTabContent">
         <div class="product-tab tab-pane fade " id="product" role="tabpanel" aria-labelledby="product-tab">
@@ -193,284 +191,7 @@
                 </div>
 
             </div>
-
-            
         </div>
-        <div class="plan-tab tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div id="plan-management-view" style="display: inline-flex;">
-                <div class="plan-sub-tab">
-                    <div class="plan-sub-tab-label">
-                        Parent Packages
-                        <button style="display: none;" onclick="update_packages_list()"></button>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                            data-target="#create_new_package_modal" style="float: right;">Add Package</button>
-                    </div>
-
-                    <div style="margin-top: 20px;height: 85vh;overflow-y: scroll;">
-                        <ul class="list-group" id="packages_list" style="display: unset; overflow-y: scroll;">
-
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="plan-sub-tab">
-
-                    <div class="plan-sub-tab-label" style="display: -webkit-inline-box;">
-                        <div>
-                            Vehicle Packages
-                            <p id="opened_plan">Select Parent Package</p>
-                        </div>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                            id="add_vehicle-package-button" data-target="#create_new_vehicle_modal"
-                            style="margin-top:10px;margin-left: 20px;">Add Vehicle
-                            Plan</button>
-                    </div>
-                    <div>
-                        <div id="no_vehicles_layout">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title" id="no_vehicles_layout_header">No Cars Available.
-                                            </h5>
-                                            <p class="card-text">Each parent package is enabled with car plans added to
-                                                it
-                                                for particular amount of Kms & Time Duration. Kindly add vehicle plans
-                                                to
-                                                this package.</p>
-                                            <a href="#" class="btn btn-primary" data-toggle="modal"
-                                                id="no_vehicles_layout_action_button"
-                                                data-target="#create_new_vehicle_modal" readonly>Add Vechicle Plan.</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <ul class="list-group" id="vechicles_list_ul">
-
-
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="plan-sub-tab">
-                    <div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div id="plan-loader" style="display:none;width: 100vw;height: 95vh;text-align: center;">
-                <div class="spinner-border" role="status" style="margin-top: 30vh;width: 6rem; height: 6rem;">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-    </div>
-
-
-
-    <div class="modal" id="create_new_package_modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Package</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <form id="packake_creation_form">
-
-                        <label for="basic-url">Enter Plan Name</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Plan Name</span>
-                            </div>
-                            <input name="name" type="text" class="form-control" id="plan-name-input"
-                                aria-describedby="basic-addon3">
-                        </div>
-
-
-                        <label for="basic-url" style="margin-bottom: 0px!important;">Enter Plan Description</label>
-                        <div class="input-group">
-                            <textarea name="package_description" style="margin-bottom: 15px;" class="form-control"
-                                aria-label="With textarea"></textarea>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputEmail4">Kms Billed</label>
-                                <input type="number" name="kms_charged" class="form-control" id="inputEmail4"
-                                    placeholder="Customer Pays for X Kms">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputEmail4">Kms Alloted</label>
-                                <input type="number" name="alloted_kms" class="form-control" id="inputEmail4"
-                                    placeholder="Actual Kms for Customer">
-                            </div>
-                        </div>
-
-
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputEmail4">Time</label>
-                                <input type="number" name="alloted_time" class="form-control" id="inputEmail4"
-                                    placeholder="Enter Amount Of Time">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputPassword4">Time Unit</label>
-                                <select id="inputState" name="alloted_time_unit" class="form-control">
-                                    <option selected readonly>Select Unit</option>
-                                    <option>Hour(s)</option>
-                                    <option>Day(s)</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="capture_new_apckage_form()">Save
-                        changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal" id="create_new_vehicle_modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Vehicle Package</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <form id="create_new_vehicle_modal_form">
-
-                        <label for="basic-url">Plan Name</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Plan Name</span>
-                            </div>
-                            <input name="parent-plan-name" type="text" class="form-control" id="parent-plan-name-input"
-                                aria-describedby="basic-addon3" readonly>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col">
-                                <label for="inputEmail4">Charged Kms</label>
-                                <input type="number" name="plan_charged_kms" class="form-control" id="plan_charged_kms"
-                                    placeholder="Alloted Kms" readonly>
-                            </div>
-
-                            <div class="form-group col">
-                                <label for="inputEmail4">Alloted Kms</label>
-                                <input type="number" name="plan_alloted_kms" class="form-control" id="plan_alloted_kms"
-                                    placeholder="Alloted Kms" readonly>
-                            </div>
-
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputPassword4">Vechile</label>
-                                <select class="form-control" name="selected_vehicle" id="#vehicle_list_select"
-                                    onchange="setseats(this.options[this.selectedIndex].getAttribute('seats'));">
-                                    <option selected readonly>Select Vechile</option>
-                                    <option value="Maruti Suzuki Dzire" seats="4">Maruti Suzuki Dzire</option>
-                                    <option value="Toyota Etios" seats="4">Toyota Etios</option>
-                                    <option value="Maruti Suzuki Ertiga" seats="6">Maruti Suzuki Ertiga</option>
-                                    <option value="Toyota Innova" seats="7">Toyota Innova</option>
-                                    <option value="Toyota Innova Crysta" seats="6">Toyota Innova Crysta</option>
-                                    <option value="Chevrolet Tavera" seats="8">Chevrolet Tavera</option>
-                                    <option value="Force Toofan" seats="13">Force Toofan</option>
-                                    <option value="Force Traveller [12 Seater]" seats="12">Force Traveller [12 Seater]
-                                    </option>
-                                    <option value="Force Traveller [17 Seater]" seats="17">Force Traveller [17 Seater]
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="inputEmail4">No Of Seats</label>
-                                <input type="number" name="no_of_seats" class="form-control" id="no_of_seats_input"
-                                    placeholder="No Of Seats" value="0" readonly>
-                            </div>
-                        </div>
-
-                        <label for="basic-url"><b>Ride Price</b> [Min Cost To Customer]</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Plan Price</span>
-                            </div>
-                            <input name="plan_baseprice" type="text" class="form-control"
-                                id="parent-plan-baseprice-input" aria-describedby="basic-addon3" readonly>
-                        </div>
-
-
-                        <div class="form-row">
-                            <div class="form-group col">
-                                <label for="inputEmail4">Price / Km</label>
-                                <input type="number" name="price_per_km" class="form-control" id="price_per_km_input"
-                                    placeholder="Enter Price">
-                            </div>
-
-                            <div class="form-group col">
-                                <label for="inputEmail4">Base Amount</label>
-                                <input type="number" name="base_amount" class="form-control" id="base_amount_input"
-                                    placeholder="Min Payable Amount" readonly>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputPassword4">Allowance</label>
-                                <select id="allowance_selectbox" name="allowance_indicator" class="form-control"
-                                    onchange="setup_allowance_index(this.options[this.selectedIndex].getAttribute('value'));">
-                                    <option selected value="0">No Allowance</option>
-                                    <option value="1">1 Night</option>
-                                    <option value="2">2 Nights</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col">
-                                <label for="inputEmail4">Allowance Amount/ Night</label>
-                                <input type="number" name="allowance_cost_per_unit" class="form-control"
-                                    id="allowance_amt_input" placeholder="Driver Allowance Cost / Night" value="0"
-                                    readonly>
-                            </div>
-                        </div>
-
-
-                        <label for="basic-url" style="margin-bottom: 0px!important;">Enter Terms & Conditions. [ Use ;
-                            as seperator]</label>
-                        <div class="input-group">
-                            <textarea name="description" style="min-height:100px;margin-bottom: 15px;"
-                                class="form-control" aria-label="With textarea"></textarea>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="vehicle_plan_creation_form()">Save
-                        changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="index.js"></script>
     <script>
         //localStorage.setItem('packages','');
