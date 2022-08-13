@@ -39,3 +39,29 @@ background-color: #f0f0f0;
     margin-top: -7px;
     color: darkgrey;
 }
+.packages_div{
+    display:flex;
+}
+#packages_list{
+    width:50%;
+    margin-right: 0.5rem;
+}
+#special_packages_list{
+    width:50%;
+
+}
+#package_heading{
+    width:50%;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+#special_package_heading{
+    width:50%;
+    font-weight: 600;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    
+
+}

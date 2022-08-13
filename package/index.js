@@ -7,7 +7,7 @@ var opened_plan_index;
 var opened_vehicle_plans = {};
 var opened_vehicle_plan_index = -1;
 
-var received_plans; 
+var received_plans;
 
 
 var capture_new_apckage_form = function () {
@@ -216,6 +216,75 @@ var vehicle_plan_creation_form = function () {
     }
 };
 
+function update_special_packages_list() {
+    $("#plan-management-view").hide();
+    $("#plan-loader").show();
+    $.ajax({
+        url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllPackages",
+        method: "POST", //First change type to method here
+        success: function (response) {
+            //localStorage.setItem('packages', JSON.stringify(packages));
+            alert("Successfully Received;");
+            console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/createPackage", response);
+            received_plans = response;
+            var data = response;
+            //console.log('storage', data);
+            var items = [];
+            $.each(data, function (i, package) {
+                if (package.special_plan == 'true') {
+                    var special = '<li class="list-group-item list-group-item-action" name="' + i + '" id="' + package.id + '">' +
+                        '<div class="d-flex w-100 justify-content-between">' +
+                        '<h5 class="mb-1" style="cursor:pointer;" onclick="openplan(' + i + ')">' + package.pickup_location + ' To ' + package.drop_location +'<br>'+'<small>'+'Price:-'+' ₹'+package.price+'</small>'+
+                        '</div>' +
+                        '<div class="d-flex w-100" style="justify-content: end;margin-top:10px">' +
+                         
+                        '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important; " id="' + i + '" onclick="delete_special_plan(' + i + ')" class="badge badge-danger badge-pill">Delete</span>' +
+                        '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important;" id="' + i + '"onclick="edit_special_plan(' + i + ')" class="badge badge-primary badge-pill" style="margin-right:5px;padding:5px;">Edit</span>' +
+                        '</div>'
+                    '<div class="d-flex w-100 justify-content-between">' +
+                    '<small class="text-muted">date_1 : ' + package.date_1
+                        '<small class="text-muted">date_2 : ' + package.date_2 + '<br>'
+                    '<small class="text-muted">date_3 : ' + package.date_3 +
+                        '<small class="text-muted">date_4 : ' + package.date_4 +
+                        '<small class="text-muted">date_5 : ' + package.date_5 +
+                        '<small class="text-muted">date_6 : ' + package.date_6 +
+                        '<small class="text-muted">date_7 : ' + package.date_7 +
+                        '<small class="text-muted">date_8 : ' + package.date_8 +
+                        '<small class="text-muted">date_9 : ' + package.date_9 +
+                        '<small class="text-muted">date_10 : ' + package.date_10 +
+                        '<small class="text-muted">date_11 : ' + package.date_11 +
+                        '<small class="text-muted">date_12 : ' + package.date_12 +
+                        '</div>' +
+
+                        +
+                        '</li>';
+
+                    // console.log(special);
+                    items.push(special);
+                }
+            });
+            document.getElementById("special_packages_list").innerHTML = "";
+            $('#special_packages_list').append(items.join(''));
+
+            isEditOn = false;
+            editIndex = -1;
+            opened_plan;
+            opened_plan_index;
+            opened_vehicle_plans = {};
+            opened_vehicle_plan_index = -1;
+            setup_vehicle_view();
+            $("#plan-loader").hide();
+            $("#plan-management-view").show();
+
+
+        },
+        error: function () {
+            alert("error");
+        }
+    });
+
+
+}
 function update_packages_list() {
     $("#plan-management-view").hide();
     $("#plan-loader").show();
@@ -231,38 +300,38 @@ function update_packages_list() {
             //console.log('storage', data);
             var items = [];
             $.each(data, function (i, package) {
-                if (package.special_plan == "true") {
-                    var special = '<li class="list-group-item list-group-item-action" name="' + i + '" id="' + package.id + '">' +
-                        '<div class="d-flex w-100 justify-content-between">' +
-                        '<h5 class="mb-1" style="cursor:pointer;" onclick="openplan(' + i + ')">' + package.pickup_location + ' To ' + package.drop_location  +
-                        '</div>' +
-                        '<div class="d-flex w-100" style="justify-content: end;margin-top:10px">' +
-                        '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important; " id="' + i + '" onclick="delete_special_plan(' + i + ')" class="badge badge-danger badge-pill">Delete</span>' +
-                        '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important;" id="' + i + '"onclick="edit_special_plan(' + i + ')" class="badge badge-primary badge-pill" style="margin-right:5px;padding:5px;">Edit</span>' +
-                        '</div>'
-                        '<div class="d-flex w-100 justify-content-between">' +
-                        '<small class="text-muted">date_1 : ' + package.date_1 + 
-                        '<small class="text-muted">date_2 : ' + package.date_2 + '<br>' 
-                        '<small class="text-muted">date_3 : ' + package.date_3 + 
-                        '<small class="text-muted">date_4 : ' + package.date_4 + 
-                        '<small class="text-muted">date_5 : ' + package.date_5 + 
-                        '<small class="text-muted">date_6 : ' + package.date_6 + 
-                        '<small class="text-muted">date_7 : ' + package.date_7 + 
-                        '<small class="text-muted">date_8 : ' + package.date_8 + 
-                        '<small class="text-muted">date_9 : ' + package.date_9 + 
-                        '<small class="text-muted">date_10 : ' + package.date_10 + 
-                        '<small class="text-muted">date_11 : ' + package.date_11 + 
-                        '<small class="text-muted">date_12 : ' + package.date_12 +                        
-                        '</div>' +
-                        
-                         +
-                        '</li>';
-                        
-                    // console.log(special);
-                    items.push(special);
-                }
-                else if(package.isDeleted){
-                    
+                // if (package.special_plan == true) {
+                //     var special = '<li class="list-group-item list-group-item-action" name="' + i + '" id="' + package.id + '">' +
+                //         '<div class="d-flex w-100 justify-content-between">' +
+                //         '<h5 class="mb-1" style="cursor:pointer;" onclick="openplan(' + i + ')">' + package.pickup_location + ' To ' + package.drop_location +
+                //         '</div>' +
+                //         '<div class="d-flex w-100" style="justify-content: end;margin-top:10px">' +
+                //         '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important; " id="' + i + '" onclick="delete_special_plan(' + i + ')" class="badge badge-danger badge-pill">Delete</span>' +
+                //         '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important;" id="' + i + '"onclick="edit_special_plan(' + i + ')" class="badge badge-primary badge-pill" style="margin-right:5px;padding:5px;">Edit</span>' +
+                //         '</div>'
+                //     '<div class="d-flex w-100 justify-content-between">' +
+                //         '<small class="text-muted">date_1 : ' + package.date_1 +
+                //         '<small class="text-muted">date_2 : ' + package.date_2 + '<br>'
+                //     '<small class="text-muted">date_3 : ' + package.date_3 +
+                //         '<small class="text-muted">date_4 : ' + package.date_4 +
+                //         '<small class="text-muted">date_5 : ' + package.date_5 +
+                //         '<small class="text-muted">date_6 : ' + package.date_6 +
+                //         '<small class="text-muted">date_7 : ' + package.date_7 +
+                //         '<small class="text-muted">date_8 : ' + package.date_8 +
+                //         '<small class="text-muted">date_9 : ' + package.date_9 +
+                //         '<small class="text-muted">date_10 : ' + package.date_10 +
+                //         '<small class="text-muted">date_11 : ' + package.date_11 +
+                //         '<small class="text-muted">date_12 : ' + package.date_12 +
+                //         '</div>' +
+
+                //         +
+                //         '</li>';
+
+                //     // console.log(special);
+                //     items.push(special);
+                // }
+               if (package.isDeleted) {
+
                 }
                 else {
                     var li = '<li class="list-group-item list-group-item-action" name="' + i + '" id="' + package.id + '">' +
@@ -548,76 +617,76 @@ var capture_new_special_apckage_form = function () {
     data.id = "special id";
     data.special_package = true;
     console.log(data);
-    
+
 
     var go_ahead = true;
     if (!data.pickup_location) {
         go_ahead = false;
         alert("Please Fill your Pickup Location");;
-    
 
 
-    if (!data.drop_location) {
-        go_ahead = false;
-        alert("Please Fill your Drop Location ");;
-    }
-    if (!data.date_1) {
-        go_ahead = false;
-        alert("Please Fill All Details [Alloted_Date]");;
-    }
 
-    if (!data.date_2) {
-        go_ahead = false;
-        alert("Please Fill All Details [Alloted_Date]");;
-    }
+        if (!data.drop_location) {
+            go_ahead = false;
+            alert("Please Fill your Drop Location ");;
+        }
+        if (!data.date_1) {
+            go_ahead = false;
+            alert("Please Fill All Details [Alloted_Date]");;
+        }
 
-    if (!data.date_3) {
-        go_ahead = false;
-        alert("Please Fill All Details [Alloted_Date]");;
-    }
+        if (!data.date_2) {
+            go_ahead = false;
+            alert("Please Fill All Details [Alloted_Date]");;
+        }
 
-    if (!data.date_4) {
-        go_ahead = false;
-        alert("Please Fill All Details [Alloted_Date]");;
-    }
+        if (!data.date_3) {
+            go_ahead = false;
+            alert("Please Fill All Details [Alloted_Date]");;
+        }
 
-    if (!data.date_5) {
-        go_ahead = false;
-        alert("Please Fill All Details [Alloted_Date]");;
-    }
+        if (!data.date_4) {
+            go_ahead = false;
+            alert("Please Fill All Details [Alloted_Date]");;
+        }
 
-    if (!data.date_6) {
-        go_ahead = false;
-        alert("Please Fill All Details [Alloted_Date]");;
-    }
-    if (!data.date_7) {
-        go_ahead = false;
-        alert("Please Fill All Details [Alloted_Date]");;
-    }
-    if (!data.date_8) {
-        go_ahead = false;
-        alert("Please Fill All Details [Alloted_Date]");; 
-    }  
-    if (!data.date_9) {
-        go_ahead = false;
-        alert("Please Fill All Details [Alloted_Date]");; 
-    }  
-    if (!data.date_10) {
-        go_ahead = false;
-        alert("Please Fill All Details [Alloted_Date]");; 
-    }  
-    if (!data.date_11) {
-        go_ahead = false;
-        alert("Please Fill All Details [Alloted_Date]");; 
-    }  
-    if (!data.date_12) {
-        go_ahead = false;
-        alert("Please Fill All Details [Alloted_Date]");; 
-    }  
-    if (!data.price_per_km) {
-        go_ahead = false;     
-        alert("Please Fill All Details [name]");;
-    }
+        if (!data.date_5) {
+            go_ahead = false;
+            alert("Please Fill All Details [Alloted_Date]");;
+        }
+
+        if (!data.date_6) {
+            go_ahead = false;
+            alert("Please Fill All Details [Alloted_Date]");;
+        }
+        if (!data.date_7) {
+            go_ahead = false;
+            alert("Please Fill All Details [Alloted_Date]");;
+        }
+        if (!data.date_8) {
+            go_ahead = false;
+            alert("Please Fill All Details [Alloted_Date]");;
+        }
+        if (!data.date_9) {
+            go_ahead = false;
+            alert("Please Fill All Details [Alloted_Date]");;
+        }
+        if (!data.date_10) {
+            go_ahead = false;
+            alert("Please Fill All Details [Alloted_Date]");;
+        }
+        if (!data.date_11) {
+            go_ahead = false;
+            alert("Please Fill All Details [Alloted_Date]");;
+        }
+        if (!data.date_12) {
+            go_ahead = false;
+            alert("Please Fill All Details [Alloted_Date]");;
+        }
+        if (!data.price_per_km) {
+            go_ahead = false;
+            alert("Please Fill All Details [name]");;
+        }
     }
     if (go_ahead) {
         $('#create_new_special_package_modal').modal('hide');
@@ -649,19 +718,19 @@ var capture_new_special_apckage_form = function () {
                     }
                 });
             }
-            else alert("Your Plan Object is Empty, Something is wrong");    
+            else alert("Your Plan Object is Empty, Something is wrong");
         }
-         else {
+        else {
 
-          $('#create_new_package_modal').modal('hide');
-           data.id = Date.now().toString(36) + Math.random().toString(36).substr(2);
-        if (received_plans) {
-             $("#plan-management-view").hide();
-               $("#plan-loader").show();
-              var packages = received_plans;
-               console.log(packages);
-               data.plans = [];
-             packages.push(data);
+            $('#create_new_package_modal').modal('hide');
+            data.id = Date.now().toString(36) + Math.random().toString(36).substr(2);
+            if (received_plans) {
+                $("#plan-management-view").hide();
+                $("#plan-loader").show();
+                var packages = received_plans;
+                console.log(packages);
+                data.plans = [];
+                packages.push(data);
                 alert("Sending to Server");
                 var data_packet = data;
                 data_packet.special_plan = true;
@@ -695,7 +764,7 @@ var capture_new_special_apckage_form = function () {
                         update_packages_list();
                     },
                     error: function () {
-                        alert("error");    
+                        alert("error");
                     }
                 });
             }

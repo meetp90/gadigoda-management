@@ -29,8 +29,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
-    <script src="../package/index.js"></script>
-    <script src="../product/index.js"></script>
+    <script src="../index.js"></script>
     <title>Gadigoda - Plan Manager</title>
 </head>
 
@@ -47,7 +46,6 @@
                 <a class="nav-item nav-link" href="../driver/index.html">Driver</a>
                 <a class="nav-item nav-link" href="../booking/index.html">Booking</a>
                 <a class="nav-item nav-link" href="../coupon/index.html">Coupon</a>
-                <a class="nav-item nav-link" href="../product/index.html">Products</a>
             </div>
         </div>
     </nav>
@@ -64,11 +62,19 @@
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                             data-target="#create_new_package_modal" style="float: right;">Add Package</button>
                     </div>
-
-                    <div style="margin-top: 20px;height: 85vh;overflow-y: scroll;">
+                    <div style="display:flex;flex-direction:row;width:100%;">
+                        <div id="package_heading">Packages</div>
+                        <div id="special_package_heading">Special Packages</div>
+                    </div>
+                    <div class="packages_div" style="margin-top: 20px;height: 85vh;overflow-y: scroll;">
+                       
                         <ul class="list-group" id="packages_list" style="display: unset; overflow-y: scroll;">
 
                         </ul>
+                        <ul class="list-group" id="special_packages_list" style="display: unset; overflow-y: scroll;">
+ 
+                        </ul>
+
                     </div>
                 </div>
 
@@ -421,6 +427,7 @@
     <script>
         //localStorage.setItem('packages','');
         update_packages_list();
+        update_special_packages_list()
         setup_vehicle_view();
     </script>
 </body>
