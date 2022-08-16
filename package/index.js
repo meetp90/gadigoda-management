@@ -300,36 +300,35 @@ function update_packages_list() {
             //console.log('storage', data);
             var items = [];
             $.each(data, function (i, package) {
-                // if (package.special_plan == true) {
-                //     var special = '<li class="list-group-item list-group-item-action" name="' + i + '" id="' + package.id + '">' +
-                //         '<div class="d-flex w-100 justify-content-between">' +
-                //         '<h5 class="mb-1" style="cursor:pointer;" onclick="openplan(' + i + ')">' + package.pickup_location + ' To ' + package.drop_location +
-                //         '</div>' +
-                //         '<div class="d-flex w-100" style="justify-content: end;margin-top:10px">' +
-                //         '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important; " id="' + i + '" onclick="delete_special_plan(' + i + ')" class="badge badge-danger badge-pill">Delete</span>' +
-                //         '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important;" id="' + i + '"onclick="edit_special_plan(' + i + ')" class="badge badge-primary badge-pill" style="margin-right:5px;padding:5px;">Edit</span>' +
-                //         '</div>'
-                //     '<div class="d-flex w-100 justify-content-between">' +
-                //         '<small class="text-muted">date_1 : ' + package.date_1 +
-                //         '<small class="text-muted">date_2 : ' + package.date_2 + '<br>'
-                //     '<small class="text-muted">date_3 : ' + package.date_3 +
-                //         '<small class="text-muted">date_4 : ' + package.date_4 +
-                //         '<small class="text-muted">date_5 : ' + package.date_5 +
-                //         '<small class="text-muted">date_6 : ' + package.date_6 +
-                //         '<small class="text-muted">date_7 : ' + package.date_7 +
-                //         '<small class="text-muted">date_8 : ' + package.date_8 +
-                //         '<small class="text-muted">date_9 : ' + package.date_9 +
-                //         '<small class="text-muted">date_10 : ' + package.date_10 +
-                //         '<small class="text-muted">date_11 : ' + package.date_11 +
-                //         '<small class="text-muted">date_12 : ' + package.date_12 +
-                //         '</div>' +
+                if (package.special_plan == true) {
+                    var special = '<li class="list-group-item list-group-item-action" name="' + i + '" id="' + package.id + '">' +
+                        '<div class="d-flex w-100 justify-content-between">' +
+                        '<h5 class="mb-1" style="cursor:pointer;" onclick="openplan(' + i + ')">' + package.pickup_location + ' To ' + package.drop_location +
+                        '</div>' +
+                        '<div class="d-flex w-100" style="justify-content: end;margin-top:10px">' +
+                        '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important; " id="' + i + '" onclick="delete_special_plan(' + i + ')" class="badge badge-danger badge-pill">Delete</span>' +
+                        '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important;" id="' + i + '"onclick="edit_special_plan(' + i + ')" class="badge badge-primary badge-pill" style="margin-right:5px;padding:5px;">Edit</span>' +
+                        '</div>'
+                    '<div class="d-flex w-100 justify-content-between">' +
+                        '<small class="text-muted">date_1 : ' + package.date_1 +
+                        '<small class="text-muted">date_2 : ' + package.date_2 + '<br>'
+                    '<small class="text-muted">date_3 : ' + package.date_3 +
+                        '<small class="text-muted">date_4 : ' + package.date_4 +
+                        '<small class="text-muted">date_5 : ' + package.date_5 +
+                        '<small class="text-muted">date_6 : ' + package.date_6 +
+                        '<small class="text-muted">date_7 : ' + package.date_7 +
+                        '<small class="text-muted">date_8 : ' + package.date_8 +
+                        '<small class="text-muted">date_9 : ' + package.date_9 +
+                        '<small class="text-muted">date_10 : ' + package.date_10 +
+                        '<small class="text-muted">date_11 : ' + package.date_11 +
+                        '<small class="text-muted">date_12 : ' + package.date_12 +
+                        '</div>' +
+                        +
+                        '</li>';
 
-                //         +
-                //         '</li>';
-
-                //     // console.log(special);
-                //     items.push(special);
-                // }
+                    // console.log(special);
+                    items.push(special);
+                }
                if (package.isDeleted) {
 
                 }
