@@ -229,7 +229,10 @@ function update_special_packages_list() {
             //console.log('storage', data);
             var items = [];
             $.each(data, function (i, package) {
-                if (package.special_plan == 'true') {
+                if (package.isDeleted){
+
+                }
+                else if(package.special_plan) {
                     var special = '<li class="list-group-item list-group-item-action" name="' + i + '" id="' + package.id + '">' +
                         '<div class="d-flex w-100 justify-content-between">' +
                         '<h5 class="mb-1" style="cursor:pointer;" onclick="openplan(' + i + ')">' + package.pickup_location + ' To ' + package.drop_location +'<br>'+'<small>'+'Price:-'+' ₹'+package.price+'</small>'+
@@ -253,7 +256,6 @@ function update_special_packages_list() {
                         '<small class="text-muted">date_11 : ' + package.date_11 +
                         '<small class="text-muted">date_12 : ' + package.date_12 +
                         '</div>' +
-
                         +
                         '</li>';
 
@@ -298,7 +300,9 @@ function update_packages_list() {
             $.each(data, function (i, package) {
                 if (package.special_plan == "true") {
                 }
-               if (package.isDeleted) {
+                else if (package.special_plan) {
+                }
+               else if (package.isDeleted) {
 
                 }
                 else {
