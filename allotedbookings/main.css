@@ -1,0 +1,41 @@
+html {
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+html::-webkit-scrollbar {
+    width: 0px; /* For Chrome, Safari, and Opera */
+}
+
+body{
+width: 100vw;
+height: 100vh;
+font: Poppins;
+background-color: #f0f0f0;
+}
+
+#plan-management-view{
+ padding: 30px;
+}
+
+.plan-tab{
+    width: 100vw;
+    background-color: #f0f0f0;
+}
+
+.plan-sub-tab{
+    width: 27vw;
+    margin-right: 5vw;
+}
+
+.plan-sub-tab-label{
+    font-size:x-large;
+    font-weight: bold;
+}
+
+#opened_plan{
+    font-size: smaller;
+    font-weight: 400;
+    margin-top: -7px;
+    color: darkgrey;
+}

@@ -1,4 +1,9 @@
 var data;
+var data1;
+var data2;
+var allotedData;
+var allotedData1;
+
 
 $(document).ready(function () {
   $.ajax({
@@ -37,39 +42,12 @@ $(document).ready(function () {
     
       $('#allotment_button').click(function () {
         var row = table.api().rows('.selected').data();
-        var data = row[0];
-        console.log(data);
+        data1 = row[0];
+        console.log(data1);
     });
   }
 });
-console.log(data)
 
-// function create_new_partner() {
-//   alert("this will create new partner");
-//   var data = $('#make_new_partner_form').serializeArray().reduce(function (obj, item) {
-//     obj[item.name] = item.value;
-//     return obj;
-//   }, {});
-//   console.log(data);
-//   $.ajax({
-//     url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/createPartner",
-//     type: "post",
-//     data: data,
-//     success: function (response) {
-//       console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/createPartner", response);
-//       $('#create_new_partner_modal').modal('hide');
-//       location.reload();
-//     },
-//     error: function (jqXHR, textStatus, errorThrown) {
-//       console.log("ERROR ON NETWORK CALL", textStatus, errorThrown);
-//     }
-//   });
-// }
-
-
-// function setseats(seats) {
-//   $("#no_of_seats_input").val(seats);
-// }
 
 function update_partner_table() {
   $.ajax({
@@ -87,41 +65,65 @@ function update_partner_table() {
   });
 }
 
-function allot_partner(){
+
+function allot_partner_with_booking(){
   $.ajax({
-    url : 'https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllBookings',
+    url : 'https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllPartners',
     type : 'POST',
     dataType : 'json',
     success : function(data) {
-        assignToEventsColumns_bookings(data);
+        assignToEventsColumns_partners(data);
     }
 });
-
-function assignToEventsColumns_bookings(data) {
-    var table = $('#booking_table').dataTable({
+}
+function assignToEventsColumns_partners(data) {
+    var table = $('#driver_table').dataTable({
         "bAutoWidth" : false,
         "aaData" : data,
         "columns" : [ {
-            "data" : "station"
+            "data" : "car_owner"
         }, {
-            "data" : "pickup"
+            "data" : "cars_under_management"
         }, {
-            "data" : "phoneNumber"
+            "data" : "contact_number"
         }, {
-            "data" : "pickup_date"
-        }, {
-            "data" : "pickup_time"
+            "data" : "vehicle_number"
         } ]
     })
-    // $('#partner_table').on('click', 'tr', function () {
-    //   $(this).toggleClass('selected');
-    // });
+
+    $('#driver_table').on('click', 'tr', function () {
+      $(this).toggleClass('selected');
+    });
   
-    // $('#allotment_button').click(function () {
-    //   var row = table.api().rows('.selected').data();
-    //   var data = row[0];
-    //   console.log(data);
-  // });
-}  
-}
+    $('#allotment').click(function () {
+      var row = table.api().rows('.selected').data();
+      data2 = row[0];
+      //console.log(data2);
+
+      allotedData = {
+        ...data1,
+        ...data2
+    };
+      console.log(allotedData);
+
+      alert("this will allot booking to a partner");
+      $.ajax({
+        url: " https://us-central1-gadigoda-dfc26.cloudfunctions.net/createAllotedData",
+        method: "POST",
+        data: allotedData,
+        success: function (response) {
+          alert("success");
+          console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/createAllotedData", response);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log("ERROR ON NETWORK CALL", textStatus, errorThrown);
+        }
+      });
+
+    });
+      
+      
+
+
   
+  }
