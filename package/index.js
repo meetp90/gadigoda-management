@@ -290,8 +290,6 @@ function update_packages_list() {
         url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllPackages",
         method: "POST", //First change type to method here
         success: function (response) {
-            //localStorage.setItem('packages', JSON.stringify(packages));
-            alert("Successfully Received;");
             console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllPackages", response);
             received_plans = response;
             var data = response;
