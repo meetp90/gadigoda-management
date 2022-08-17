@@ -1,7 +1,3 @@
-
-
-
-
 var isEditOn = false;
 var editIndex = -1;
 
@@ -244,92 +240,6 @@ var vehicle_plan_creation_form = function () {
   }
 };
 
-function update_packages_list() {
-  $("#plan-management-view").hide();
-  $("#plan-loader").show();
-  $.ajax({
-    url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllPackages",
-    method: "POST", //First change type to method here
-    success: function (response) {
-      //localStorage.setItem('packages', JSON.stringify(packages));
-      alert("Successfully Received;");
-      console.log(
-        "https://us-central1-gadigoda-dfc26.cloudfunctions.net/createPackage",
-        response
-      );
-      received_plans = response;
-      var data = response;
-      //console.log('storage', data);
-      var items = [];
-      $.each(data, function (i, package) {
-        if (package.isDeleted) {
-        } else {
-          var li =
-            '<li class="list-group-item list-group-item-action" name="' +
-            i +
-            '" id="' +
-            package.id +
-            '">' +
-            '<div class="d-flex w-100 justify-content-between">' +
-            '<h5 class="mb-1" style="cursor:pointer;" onclick="openplan(' +
-            i +
-            ')">' +
-            package.name +
-            "</h5>" +
-            "</div>" +
-            '<p class="mb-1">' +
-            package.package_description +
-            "</p>" +
-            '<div class="d-flex w-100 justify-content-between">' +
-            '<small class="text-muted">Billed : ' +
-            package.kms_charged +
-            "Kms</small>" +
-            '<small class="text-muted">Alloted Kms : ' +
-            package.alloted_kms +
-            "Kms.</small>" +
-            '<small class="text-muted">Alloted Time : ' +
-            package.alloted_time +
-            " " +
-            package.alloted_time_unit +
-            "</small>" +
-            "</div>" +
-            '<div class="d-flex w-100" style="justify-content: end;margin-top:10px">' +
-            '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important; " id="' +
-            i +
-            '" onclick="deleteplan(' +
-            i +
-            ')" class="badge badge-danger badge-pill">Delete</span>' +
-            '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important;" id="' +
-            i +
-            '"onclick="editplan(' +
-            i +
-            ')" class="badge badge-primary badge-pill" style="margin-right:5px;padding:5px;">Edit</span>' +
-            "</div>" +
-            "</li>";
-
-          //console.log(li)
-          items.push(li);
-        }
-      }); // close each()
-
-      document.getElementById("packages_list").innerHTML = "";
-      $("#packages_list").append(items.join(""));
-
-      isEditOn = false;
-      editIndex = -1;
-      opened_plan;
-      opened_plan_index;
-      opened_vehicle_plans = {};
-      opened_vehicle_plan_index = -1;
-      setup_vehicle_view();
-      $("#plan-loader").hide();
-      $("#plan-management-view").show();
-    },
-    error: function () {
-      alert("error");
-    },
-  });
-}
 
 function editplan(index) {
   if (received_plans) {
