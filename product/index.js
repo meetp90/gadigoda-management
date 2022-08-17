@@ -62,14 +62,14 @@ var add_new_products = function () {
     go_ahead = false;
     alert("Please Fill All Details [availableAt]");
   }
-  if (!data.media) {
-    go_ahead = false;
-    alert("Please Fill All Details [media]");
-  }
-  if (!data.type) {
-    go_ahead = false;
-    alert("Please Fill All Details [media]");
-  }
+  // if (!data.media) {
+  //   go_ahead = false;
+  //   alert("Please Fill All Details [media]");
+  // }
+  // if (!data.type) {
+  //   go_ahead = false;
+  //   alert("Please Fill All Details [media]");
+  // }
   if (go_ahead) {
     $("#add_product").modal("hide");
     if (isEditOn) {
@@ -102,7 +102,8 @@ var add_new_products = function () {
           },
         });
       } else alert("Your Plan Object is Empty, Something is wrong");
-    } else {
+    } 
+    else {
       $("#add_product").modal("hide");
       data.id = Date.now().toString(36) + Math.random().toString(36).substr(2);
       if (received_plans) {
@@ -135,7 +136,7 @@ var add_new_products = function () {
         var products = [];
         products.push(data);
         var data_packet = data;
-
+        data_packet.media = ["https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"]
         $(".products").hide();
         $("#plan-loader").show();
         alert("Sending to Server");
@@ -167,7 +168,6 @@ function update_products_list() {
     url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllProducts",
     method: "POST", 
     success: function (response) {
-      alert("Successfully Received;");
       console.log(
         "https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllProducts",
         response
