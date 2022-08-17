@@ -1,3 +1,7 @@
+
+
+
+
 var isEditOn = false;
 var editIndex = -1;
 
@@ -11,13 +15,16 @@ var received_plans;
 var items;
 var filtercategory;
 
-$(document).ready(()=>{
-  $('#media').change(function(){
+
+
+
+$(document).ready(() => {
+  $('#media').change(function () {
     const file = this.files[0];
     console.log(file);
-    if (file){
+    if (file) {
       let reader = new FileReader();
-      reader.onload = function(event){
+      reader.onload = function (event) {
         console.log(event.target.result);
         $('#imgPreview').attr('src', event.target.result);
       }
@@ -30,7 +37,7 @@ $(document).ready(function () {
     filtercategory = $(this).children("option:selected").val();
     update_products_list();
   })
-  })
+})
 
 var capture_new_apckage_form = function () {
   //localStorage.setItem('packages','');
@@ -61,6 +68,7 @@ var capture_new_apckage_form = function () {
     go_ahead = false;
     alert("Please Fill All Details [name]");
   }
+  
 
   if (go_ahead) {
     $("#create_new_package_modal").modal("hide");
@@ -424,7 +432,7 @@ function get_base_fare() {
   return Number($("#base_amount_input").val());
 }
 
-function get_alloted_km() {}
+function get_alloted_km() { }
 
 function update_plan_total_min_price(
   base_amount,
@@ -472,24 +480,24 @@ function populate_vehicles_list(plans) {
   for (var i = 0; i < plans.length; i++) {
     $("#vechicles_list_ul").append(
       "<li class='list-group-item'>" +
-        '<div style="display:inline-flex;width: -webkit-fill-available;">' +
-        '<div style="width: -webkit-fill-available;">' +
-        plans[i].selected_vehicle +
-        "</div>" +
-        '<div style="display: inline-flex;">' +
-        '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important; " id="' +
-        i +
-        '" class="badge badge-danger badge-pill"> ₹ ' +
-        plans[i].plan_baseprice +
-        "</span>" +
-        '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important;" id="' +
-        i +
-        '"onclick="editvehicleplan(' +
-        i +
-        ')" class="badge badge-primary badge-pill" style="margin-right:5px;padding:5px;">Edit</span>' +
-        "</div>" +
-        "</div>" +
-        "</li>"
+      '<div style="display:inline-flex;width: -webkit-fill-available;">' +
+      '<div style="width: -webkit-fill-available;">' +
+      plans[i].selected_vehicle +
+      "</div>" +
+      '<div style="display: inline-flex;">' +
+      '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important; " id="' +
+      i +
+      '" class="badge badge-danger badge-pill"> ₹ ' +
+      plans[i].plan_baseprice +
+      "</span>" +
+      '<span style="border-radius:5px!important;cursor: pointer;margin-right:5px!important;padding:5px!important;" id="' +
+      i +
+      '"onclick="editvehicleplan(' +
+      i +
+      ')" class="badge badge-primary badge-pill" style="margin-right:5px;padding:5px;">Edit</span>' +
+      "</div>" +
+      "</div>" +
+      "</li>"
     );
   }
 }
@@ -520,10 +528,11 @@ function editvehicleplan(i) {
 // product_price: ""
 // [[Prototype]]: Object
 
-// $("#submit").click(function () {
+$("#submit").click(function () {
 
-//     add_new_products();
-// });
+  add_new_products();
+});
+
 
 var add_new_products = function () {
   //for checkbox
@@ -577,6 +586,10 @@ var add_new_products = function () {
     alert("Please Fill All Details [availableAt]");
   }
   if (!data.media) {
+    go_ahead = false;
+    alert("Please Fill All Details [media]");
+  }
+  if (!data.type) {
     go_ahead = false;
     alert("Please Fill All Details [media]");
   }
@@ -742,6 +755,9 @@ function update_products_list() {
             " </li> " +
             "<li><strong>Delay :</strong>" +
             products.delay +
+            "</li>" +
+            "<li><strong>Type :</strong>" +
+            products.type +
             "</li>" +
             "<li><strong>Category :</strong>" +
             products.category +
