@@ -1,16 +1,14 @@
 var isEditOn = false;
 var editIndex = -1;
-
 var opened_plan;
 var opened_plan_index;
-
 var opened_vehicle_plans = {};
 var opened_vehicle_plan_index = -1;
-
 var received_plans;
 var items;
 var filtercategory;
 
+<<<<<<< HEAD
 
 
 
@@ -438,14 +436,13 @@ function editvehicleplan(i) {
 // product_price: ""
 // [[Prototype]]: Object
 
+=======
+>>>>>>> e896b677f874a1047332c94e7c48e32559bd9612
 $("#submit").click(function () {
-
   add_new_products();
 });
 
-
 var add_new_products = function () {
-  //for checkbox
   var time = [];
   $.each($("input[name='availableAt']:checked"), function () {
     time.push($(this).val());
@@ -518,12 +515,10 @@ var add_new_products = function () {
         var data_packet = data;
         $.ajax({
           url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/updateProduct",
-          method: "POST", //First change type to method here
+          method: "POST", 
 
           data: data_packet,
           success: function (response) {
-            //received_plans=response;
-            //alert("Successfully Edited");
             console.log(
               "https://us-central1-gadigoda-dfc26.cloudfunctions.net/updateProduct",
               response
@@ -594,46 +589,19 @@ var add_new_products = function () {
       }
     }
   }
-  // if (go_ahead) {
-  //   console.log("nice");
-  //   console.log(data_packet);
-  //   $.ajax({
-  //     url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/createProduct",
-  //     method: "POST", //First change type to method here
-
-  //     data: data_packet,
-  //     success: function (response) {
-  //       //received_plans=response;
-  //       alert("Successfully Added");
-  //       console.log(
-  //         "https://us-central1-gadigoda-dfc26.cloudfunctions.net/createProduct",
-  //         response
-  //       );
-  //       $("#add_product").modal("hide");
-  //       update_products_list();
-  //     },
-  //     error: function () {
-  //       alert("error");
-  //     },
-  //   });
-  // } else {
-  //   console.log("Your Product Object is Empty, Something is wrong");
-  // }
+  
 };
 
 function update_products_list() {
   $.ajax({
-    url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllProducts?type=" + filtercategory,
-    method: "POST", //First change type to method here
+    url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllProducts",
+    method: "POST", 
     success: function (response) {
       alert("Successfully Received;");
       console.log(
-        "https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllProducts?type=" + filtercategory,
+        "https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllProducts",
         response
       );
-      received_products = response;
-      console.log(filtercategory);
-      // console.log(received_products)
       var data = response;
       items = [];
       $.each(data, function (i, products) {
