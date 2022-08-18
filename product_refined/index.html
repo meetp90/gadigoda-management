@@ -53,8 +53,8 @@
     <!-- filter -->
     <div id="filter_container">
         <label for="filter" class="font-weight-bold  ">FILTER </label>
-        <select id="filter" name="filter" class="form-control">
-            <option selected value="">None</option>
+        <select id="filter" name="filter" class="form-control" onchange="update_products_list()">
+            <option selected value="none">None</option>
             <option value="food">Food</option>
             <option value="accessories">Accessories</option>
         </select>
@@ -172,8 +172,6 @@
                                     <img id="imgPreview" style="width:100%;height:100%" />
                                 </div>
                                 <input type="file" id="media" name="media" class="upload-input" required>
-
-                                <button id="upload_image_btn">Upload Image</button>
                             </div>
                         </div>
                     </form>
@@ -183,9 +181,9 @@
                         Close
                     </button>
                     <button type="button" id="submit" class="btn btn-primary"
-                        onclick="add_new_products();return false">Submit</button>
+                        >Submit</button>
                 </div>
-            </div>
+            </div> 
 
         </div>
     </div>
