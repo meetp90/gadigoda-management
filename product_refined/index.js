@@ -1,17 +1,21 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
-import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-storage.js";
-const firebaseConfig = {
-  apiKey: "AIzaSyAsggKuEMDNQL8-9x51t64H1FhFNKqJCp4",
-  authDomain: "gadigoda-dfc26.firebaseapp.com",
-  databaseURL: "https://gadigoda-dfc26-default-rtdb.firebaseio.com",
-  projectId: "gadigoda-dfc26",
-  storageBucket: "gadigoda-dfc26.appspot.com",
-  messagingSenderId: "329109229217",
-  appId: "1:329109229217:web:ae8e4de7b401a21ba2aae0",
-  measurementId: "G-JV9VS26G2N"
-};
-const app = initializeApp(firebaseConfig);
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+// import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-storage.js";
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAsggKuEMDNQL8-9x51t64H1FhFNKqJCp4",
+//   authDomain: "gadigoda-dfc26.firebaseapp.com",
+//   databaseURL: "https://gadigoda-dfc26-default-rtdb.firebaseio.com",
+//   projectId: "gadigoda-dfc26",
+//   storageBucket: "gadigoda-dfc26.appspot.com",
+//   messagingSenderId: "329109229217",
+//   appId: "1:329109229217:web:ae8e4de7b401a21ba2aae0",
+//   measurementId: "G-JV9VS26G2N"
+// };
+// const app = initializeApp(firebaseConfig);
 
+
+//Declaring Global Variables
+ var received_products;
+ 
 $(document).ready(function () {
   update_products_list();
 });
@@ -27,6 +31,7 @@ function update_products_list() {
       success: function (response) {
         console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllProducts", response);
         var data = response;
+        received_products=response;
         items = [];
         $.each(data, function (i, products) {
           if (products.isDeleted) {
@@ -101,6 +106,7 @@ function update_products_list() {
       success: function (response) {
         console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/getProductsByFood", response);
         var data = response;
+        received_products=response;
         items = [];
         $.each(data, function (i, products) {
           if (products.isDeleted) {
@@ -314,6 +320,40 @@ function add_new_products() {
       success: function (response) {
         console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/createProduct", response);
         location.reload();
+      },
+      error: function () {
+        alert("error");
+      },
+    });
+  }
+}
+
+// Function : Delete Products
+function deleteproducts(index) {
+  if (received_products[index]) {
+    var data = received_products[index];
+    data.isDeleted = true;
+    // alert(data.isDeleted)
+    console.log(data.isDeleted);
+    // console.log(data);
+    console.log(received_products[index]);
+    console.log("hello");
+    $(".products").hide();
+    $("#plan-loader").show();
+    var data_packet = data;
+    $.ajax({
+      url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/updateProduct",
+      method: "POST", //First change type to method here
+
+      data: data_packet,
+      success: function (response) {
+        alert("Successfully Deleted");
+        console.log(
+          "https://us-central1-gadigoda-dfc26.cloudfunctions.net/updateProduct",
+          response
+        );
+        $("#add_product").modal("hide");
+        update_products_list();
       },
       error: function () {
         alert("error");
