@@ -14,6 +14,11 @@ font: Poppins;
 background-color: #f0f0f0;
 }
 
+img{
+    height:200px;
+    width:200px;
+    border:2px black solid;
+}
 #plan-management-view{
  padding: 30px;
 }
