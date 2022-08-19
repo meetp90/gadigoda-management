@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="index.css">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
+    
+    <title>Gadigoda - Product</title>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="../package/index.html">Plans <span
+                        class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="../driver/index.html">Driver</a>
+                <a class="nav-item nav-link" href="../booking/index.html">Booking</a>
+                <a class="nav-item nav-link" href="../coupon/index.html">Coupon</a>
+
+                <a class="nav-link" id="product-tab" data-toggle="tab" href="#product"  onclick="update_products_list()" role="tab" aria-controls="product"
+                aria-selected="true">Products</a>
+                <a class="nav-item nav-link" href="../allotedbookings/index.html">Alloted Bookings</a>
+            </div>
+        </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="product-tab tab-pane fade " id="product" role="tabpanel" aria-labelledby="protab">
+            <div>
+                <div class="topbar">
+                    <h1>Products</h1>
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_product">
+                        Add Products
+                    </button>
+
+                    <div id="filter_container">
+                        <label for="filter" class="font-weight-bold  ">FILTER </label>
+                        <select id="filter" name="filter" class="form-control">
+                            <option selected value="">None</option>
+                            <option value="food">Food</option>
+                            <option value="accessories">Accessories</option>
+                        </select>
+                    </div>
+                    <div class="products"></div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="add_product" tabindex="-1" role="dialog" aria-labelledby="add_productLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add Product</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="product_adding_form" method="POST">
+                                    <label for="product_name" class="font-weight-bold">Enter Product Name</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon3">Product Name</span>
+                                        </div>
+                                        <input name="name" type="text" class="form-control" id="name"
+                                            aria-describedby="basic-addon3" required />
+                                    </div>
+
+                                    <label for="basic-url" style="margin-bottom: 0px !important"
+                                        class="font-weight-bold" name="desc">Enter
+                                        Product
+                                        Description</label>
+                                    <div class="input-group">
+                                        <textarea name="desc" style="margin-bottom: 15px" class="form-control" id="desc"
+                                            aria-label="With textarea" required></textarea>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="price" class="font-weight-bold">Price</label>
+                                            <input type="number" name="price" class="form-control" id="price"
+                                                placeholder="Enter Price" required />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="mrp" class="font-weight-bold">MRP</label>
+                                            <input type="number" name="mrp" class="form-control" id="mrp"
+                                                placeholder="Enter MRP" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="location" class="font-weight-bold">Location</label>
+                                            <select id="location" name="locations" class="form-control">
+                                                <option selected readonly>Select Location</option>
+                                                <option value="location1">Location 1</option>
+                                                <option value="location2">Location 2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-lg-9">
+                                            <label for="delay" class="font-weight-bold">Delay</label>
+                                            <input type="number" class="form-control"
+                                                placeholder="Enter Delay in minutes" id="delay" name="time" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="type" class="font-weight-bold">Type</label>
+                                            <select id="type" name="type" class="form-control">
+                                                <option selected readonly>Select Type</option>
+                                                <option value="food">Food</option>
+                                                <option value="accessories">Accessories</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-lg-9">
+                                            <label for="category" class="font-weight-bold">Category</label>
+                                            <input type="text" class="form-control" placeholder="Enter Category"
+                                                id="category" required name="category" />
+                                        </div>
+                                    </div>
+                                    <label for="category" class="font-weight-bold">Available At:</label>
+                                    <div class="form-row">
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="availableAt" type="checkbox"
+                                                id="Morning" value="morning">
+                                            <label class="form-check-label" for="inlineCheckbox1">Morning</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="availableAt" type="checkbox"
+                                                id="Afternoon" value="afternoon">
+                                            <label class="form-check-label" for="inlineCheckbox2">Afternoon</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="availableAt" type="checkbox"
+                                                id="Evening" value="evening">
+                                            <label class="form-check-label" for="inlineCheckbox3">Evening</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="availableAt" type="checkbox"
+                                                id="Night" value="night">
+                                            <label class="form-check-label" for="inlineCheckbox3">Night</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 mt-4">
+                                            <label for="img" class="font-weight-bold" :>Upload Image :</label>
+                                            <div class="holder">
+                                                <img id="imgPreview" style="width:100%;height:100%" />
+                                            </div>
+                                            <input type="file" id="media" name="media" class="upload-input" required>
+
+                                            <button id="upload_image_btn">Upload Image</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="clear" class="btn btn-secondary" data-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="button" id="submit" class="btn btn-primary"
+                                    onclick="add_new_products();return false">Submit</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script src="index.js"></script>
+        <script>
+            update_products_list()
+        </script>
+        <!-- <script >
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+            const firebaseConfig = {
+                apiKey: "AIzaSyAsggKuEMDNQL8-9x51t64H1FhFNKqJCp4",
+                authDomain: "gadigoda-dfc26.firebaseapp.com",
+                databaseURL: "https://gadigoda-dfc26-default-rtdb.firebaseio.com",
+                projectId: "gadigoda-dfc26",
+                storageBucket: "gadigoda-dfc26.appspot.com",
+                messagingSenderId: "329109229217",
+                appId: "1:329109229217:web:ae8e4de7b401a21ba2aae0",
+                measurementId: "G-JV9VS26G2N"
+            };  
+
+            const app = initializeApp(firebaseConfig);
+            import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-storage.js";
+           
+            async function UploadProcess() {
+                const file = ''
+                $('#media').change(function () {
+                    file = this.files[0];
+                });
+                var ImgToUpload = file;
+                fileName = document.querySelector('#media').value;
+                var ImgName = fileName.split("\\").pop();
+                console.log(ImgName);
+                const metaData = {
+                    contentType: ImgToUpload.type
+                }
+                const storage = getStorage();
+                const storageRef = sRef(storage, "Images/" + ImgName);
+                const UploadTask = uploadBytesResumable(storageRef, ImgToUpload, metaData);
+
+                UploadTask.on('state-changed', (snapshot) => {
+                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log("Upload " + progress + "%");
+                },
+                    (error) => {
+                        alert('ERROR:iMAGE not uploaded');
+                    },
+                    () => {
+                        getDownloadURL(UploadTask.snapshot.ref).then((downloadURL) => {
+                            console.log(downloadURL);
+                        });
+                    }
+                );
+            }
+            $('#upload_image_btn').onclick = UploadProcess;
+        </script> -->
+</body>
+
+</html>
