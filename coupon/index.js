@@ -53,6 +53,8 @@ function create_new_partner() {
     return obj;
   }, {});
   data.isActive = true;
+  data.id = Date.now().toString(36) + Math.random().toString(36).substr(2);
+
   console.log(data);
   $.ajax({
     url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/createDiscountCoupon",
