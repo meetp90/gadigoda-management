@@ -82,8 +82,81 @@
                 <tbody>
                 </tbody>
             </table>
+            <button type="button" id="edit_button" class="btn btn-outline-primary" style="margin-left: 10px;" data-toggle="modal"
+            data-target="#edit_coupon_modal" >Edit Coupon</button>
         </div>
     </div>
+    </div>
+    <div class="modal" id="edit_coupon_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Coupon</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="" id="make_new_partner">
+                        <h3>Create New Coupon</h3>
+                        <form id="edit_coupon_form">
+
+                            <div class="form-group">
+                                <label for="couponcode">Coupon Code</label>
+                                <input type="text" name="code" class="form-control" id="couponcode"
+                                    placeholder="Coupon Code" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Coupon Type</label>
+                                <select class="form-control" name="selected_coupon_type" id="#station_list_select"
+                                    onchange="setseats(this.options[this.selectedIndex].getAttribute('seats'));">
+                                    <option selected readonly disabled>Select Coupon Type</option>
+                                    <option class="list-group-item" onclick="">Percentage</option>
+                                    <option class="list-group-item" onclick="">Price</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Amount</label>
+                                <input type="number" name="amount" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="(%)percentage or ($)price" min="0">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Maximum Discount</label>
+                                <input type="number" name="maximum_amount" class="form-control"
+                                    id="exampleFormControlInput2" placeholder="Maximum amount" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Validity : Time </label>
+                                <input type="time" name="validity_time" class="form-control"
+                                    id="exampleFormControlInput3" placeholder="Validity Till" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Validity : Date </label>
+                                <input type="date" name="validity_date" class="form-control"
+                                    id="exampleFormControlInput4" placeholder="Validity Till" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Min Value</label>
+                                <input type="number" name="minimum_amount" class="form-control"
+                                    id="exampleFormControlInput5" placeholder="Enter amount for Discount" min="0"
+                                    autocomplete="off">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="save_edit_button" class="btn btn-outline-primary">Save Coupon</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 

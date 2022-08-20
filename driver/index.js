@@ -161,3 +161,4 @@ function assignToEventsColumns_bookings(data) {
   // });
 }  
 }
+
