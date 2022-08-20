@@ -90,7 +90,7 @@ function update_products_list() {
         alert("error");
       },
     });
-  } else if (filterCategory == "food") {
+  } else if (filterCategory == "food" || filterCategory == "Food" ) {
     $.ajax({
       url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/getProductsByFood",
       method: "POST",
@@ -108,7 +108,7 @@ function update_products_list() {
             var htmlcode =
               " <div class='card'>" +
               "<img src=" +
-              products.myimg +
+              products.media +
               " " +
               'class="card-img-top" style="width:100%;height:20rem"/>' +
               "<div class='card-body'>" +
@@ -167,7 +167,7 @@ function update_products_list() {
         alert("error");
       },
     });
-  } else if (filterCategory == "accessories") {
+  } else if (filterCategory == "accessories" || filterCategory == "Accessories") {
     $.ajax({
       url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/getProductsByAccessories",
       method: "POST",
@@ -184,7 +184,7 @@ function update_products_list() {
             var htmlcode =
               " <div class='card'>" +
               "<img src=" +
-              products.myimg +
+              products.media +
               " " +
               'class="card-img-top" style="width:100%;height:20rem"/>' +
               "<div class='card-body'>" +
