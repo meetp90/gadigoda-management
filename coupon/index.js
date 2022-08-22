@@ -79,26 +79,27 @@ function editcoupon(data) {
     $("#edit_coupon_form #exampleFormControlInput3").val(data.validity_time);
     $("#edit_coupon_form #exampleFormControlInput4").val(data.validity_date);
     $("#edit_coupon_form #exampleFormControlInput5").val(data.minimum_amount);
-    var new_data = $('#edit_coupon_form').serializeArray().reduce(function (obj, item) {
-      obj[item.name] = item.value;
-      return obj;
-    }, {});
+    
     $('#save_edit_button').click(function () {
-      edit_coupon(new_data);
+      edit_coupon(data);
   });
   }
 
 
-function edit_coupon(new_data){
+function edit_coupon(data){
+  var new_data = $('#edit_coupon_form').serializeArray().reduce(function (obj, item) {
+    obj[item.name] = item.value;
+    return obj;
+  }, {});
   var newdata = new_data
-  console.log(new_data)
+  newdata.id = data.id;
+  console.log(newdata)
   $.ajax({
     url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/updateDiscountCoupon",
     type: "post",
     data: newdata,
     success: function (response) {
       console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/updateDiscountCoupon", response);
-      $('#edit_coupon_modal').modal('hide');
       location.reload();
     },
     error: function (jqXHR, textStatus, errorThrown) {
