@@ -41,6 +41,11 @@ $(document).ready(function () {
       data = row[0];
       editcoupon(data);
   });
+  $('#active_button').click(function () {
+    var row = table.api().rows('.selected').data();
+    data = row[0];
+    activate_coupon(data);
+});
 }
 });
 
@@ -104,6 +109,26 @@ function edit_coupon(data){
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.log("ERROR ON NETWORK CALL", textStatus, errorThrown);
+    }
+  });
+}
+
+// Function: Activate/Deactivate Coupon
+function activate_coupon(data) {
+  if (data.isActive == "true") {
+    data.isActive = false;
+  }
+  else if(data.isActive == "false") {
+    data.isActive = true;
+  }
+  console.log(data);
+  $.ajax({
+    url: "https://us-central1-gadigoda-dfc26.cloudfunctions.net/updateDiscountCoupon",
+    type: "post",
+    data: data,
+    success: function (response) {
+      console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/updateDiscountCoupon", response);
+      location.reload();
     }
   });
 }
