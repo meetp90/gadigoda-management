@@ -4,7 +4,6 @@ var data2;
 var allotedData;
 var allotedData1;
 
-
 $(document).ready(function () {
   $.ajax({
       url : 'https://us-central1-gadigoda-dfc26.cloudfunctions.net/getAllBookings',
