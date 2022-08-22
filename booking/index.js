@@ -105,7 +105,6 @@ function assignToEventsColumns_partners(data) {
         ...data2
     };
       console.log(allotedData);
-
       alert("this will allot booking to a partner");
       $.ajax({
         url: " https://us-central1-gadigoda-dfc26.cloudfunctions.net/createAllotedData",
@@ -114,6 +113,7 @@ function assignToEventsColumns_partners(data) {
         success: function (response) {
           alert("success");
           console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/createAllotedData", response);
+          $('#allot_partner_modal').modal('hide');
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.log("ERROR ON NETWORK CALL", textStatus, errorThrown);

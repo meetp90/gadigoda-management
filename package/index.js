@@ -389,6 +389,7 @@ function delete_special_plan(index) {
                 alert("Successfully Deleted");
                 console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/updatePackage", response);
                 $('#create_new_special_package_modal').modal('hide');
+                location.reload();
                 update_packages_list();
             },
             error: function () {
@@ -680,6 +681,7 @@ var capture_new_special_apckage_form = function () {
                         console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/createPackage", response);
                         editIndex = -1;
                         isEditOn = false;
+                        location.reload();
                         update_packages_list();
                     },
                     error: function () {
@@ -711,6 +713,7 @@ var capture_new_special_apckage_form = function () {
                         //alert("Successfully Created");
                         console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/createPackage", response);
                         update_packages_list();
+                        location.reload();
                     },
                     error: function () {
                         alert("error");
@@ -730,6 +733,7 @@ var capture_new_special_apckage_form = function () {
                     data: data_packet,
                     success: function (response) {
                         console.log("https://us-central1-gadigoda-dfc26.cloudfunctions.net/createPackage", response);
+                        location.reload();  
                         update_packages_list();
                     },
                     error: function () {
