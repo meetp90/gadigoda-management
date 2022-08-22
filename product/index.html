@@ -279,6 +279,8 @@
                     >Night</label
                   >
                 </div>
+                <div>
+                  <label class="my-3 mx-2">Image URL</label>
                 <input
                   name="media"
                   type="text"
@@ -289,18 +291,20 @@
                   required
                 />
               </div>
+          
+              </div>
             </form>
             <div class="form-row">
               <div class="form-group col-md-6 mt-4">
                 <label>Image Name</label
-                ><input type="text" id="namebox" /><label id="extlab"></label
+                ><input type="text" id="namebox" class="form-control" readonly="readonly"/><label id="extlab"></label
                 ><br />
                 <br />
                 <img id="myimg" /><label id="upprogress"></label><br />
                 <br />
                 <button id="selbtn">Select Image</button>
                 <button id="upbtn">Upload Image</button>
-                <button id="downbtn">Retrieve Image</button>
+                <!-- <button id="downbtn">Retrieve Image</button> -->
               </div>
             </div>
           </div>
